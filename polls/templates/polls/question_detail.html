@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+{#<h1>{{ question.question_text }}</h1>#}
+{#<ul>#}
+{#{% for choice in question.choices.all %}#}
+{#    <li>{{ choice.choice_text }}</li>#}
+{#{% endfor %}#}
+{#</ul> #}
+
+
+<form method="POST" action="{% url 'vote' question.id %}">
+    {% csrf_token %}
+    <fieldset>
+        <legend>    <h1>{{ object.question_text }}</h1>      </legend>
+        {% for choice in object.choices.all %}
+            <input type="radio" name="choice" value="{{choice.id}}"/> <label> {{ choice.choice_text}}</label>
+        {% endfor %}
+
+    </fieldset>
+    <input type="submit" value="Проголосовать"/>
+</form>
+</body>
+</html>
